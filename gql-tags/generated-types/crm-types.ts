@@ -16,6 +16,7 @@ export type Scalars = {
 export type Mutation = {
   __typename?: 'Mutation'
   /** Usuarios */
+  autenticarUsuario: Token
   crearUsuario: User
 }
 
@@ -27,4 +28,9 @@ export type User = {
   apellido: Scalars['String']
   email: Scalars['String']
   fechaCreacion: Scalars['String']
+}
+
+export type Token = {
+  __typename?: 'Token'
+  token: Scalars['String']
 }

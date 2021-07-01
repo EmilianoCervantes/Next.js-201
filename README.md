@@ -39,6 +39,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - ```tailwindcss```
 - ```formik``` # Leer contenido del formulario
 - ```yup``` # Schema de validación
-- ```@apollo/client``` 
-- ```node-fetch``` # Conectar con URLs
+- ```@apollo/client``` # Conectarnos al servidor
+- ```node-fetch``` # https://www.npmjs.com/package/node-fetch
 - ```graphql``` # Porque usamos graphql

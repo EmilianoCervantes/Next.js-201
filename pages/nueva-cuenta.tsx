@@ -1,11 +1,13 @@
 import { useMutation } from '@apollo/client'
 import { useFormik } from 'formik'
+import { useRouter } from 'next/router'
 import { useState } from 'react'
 import * as yup from 'yup'
 import { Input, Layout2, Submit } from "../components"
 import { Mutation } from '../gql-tags/generated-types/crm-types'
 import { SIGNUP_MUTATION } from '../gql-tags/usuarios'
-import { CrmErrorMessage } from '../widgets'
+import { LOGIN } from '../navigation/crm-auth-navigation'
+import { CrmGenericMessage } from '../widgets'
 
 export default function NuevaCuenta() {
   const [mensaje, setMensaje] = useState('')
@@ -14,14 +16,16 @@ export default function NuevaCuenta() {
   // Cualquiera que sea el nombre de tu mutation, es lo que regresará la func useMutation()
   const [crearUsuario] = useMutation<Mutation>(SIGNUP_MUTATION)
 
+  const router = useRouter()
+
   // Validar formulario
   // Cada uno de los campos en el form
   const formik = useFormik({
     initialValues: {
-      nombre: 'Oscar',
-      apellido: 'del Valle',
-      email: 'e.cervantes@meetccs.com',
-      password: '12345678',
+      nombre: '',
+      apellido: '',
+      email: '',
+      password: '',
     },
     onSubmit: async valores => {
       // Opcion1 desestructurar, pero como tienen los mismos nombres, abajo yo pasé directo valores
@@ -31,12 +35,19 @@ export default function NuevaCuenta() {
         // Los resultados del query no se colocan en el state
         const { data } = await crearUsuario({
           variables: {
+            // Recordar que en GQL está estipulado que se recibe un input de tipo UsuarioInput, no los parámetros directos
+
             // Pasé directo la var valores
             input: valores
           }
         })
 
-        if (!!data?.crearUsuario) console.log(data?.crearUsuario)
+        setMensaje(`Se creó correctamente al usuario: ${data.crearUsuario.nombre}`)
+
+        setTimeout(() => {
+          setMensaje('')
+          router.push(LOGIN)
+        }, 2500)
 
       } catch (error) {
         setMensaje(error.message)
@@ -62,7 +73,7 @@ export default function NuevaCuenta() {
 
   return (
     <Layout2>
-      {!!mensaje && <CrmErrorMessage message={mensaje} />}
+      {!!mensaje && <CrmGenericMessage message={mensaje} />}
       <h1 className="text-center text-2xl text-white font-light">Crear Nueva Cuenta</h1>
 
       <div className="flex justify-center mt-5">
