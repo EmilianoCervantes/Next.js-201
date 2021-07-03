@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import { PropsWithChildren } from 'react'
+import Header from './header'
 import LayoutParams from './layout-props'
 import { Sidebar } from '..'
 
@@ -16,6 +17,7 @@ export default function Layout({ children }: PropsWithChildren<LayoutParams>) {
         <div className="flex min-h-screen">
           <Sidebar />
           <main className="sm:w-2/3 xl:w-4/5 sm:min-h-screen p-5">
+            <Header />
             {children}
           </main>
         </div>

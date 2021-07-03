@@ -42,3 +42,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - ```@apollo/client``` # Conectarnos al servidor
 - ```node-fetch``` # https://www.npmjs.com/package/node-fetch
 - ```graphql``` # Porque usamos graphql
+- ```apollo-link-context``` # Modificar headers via context para que se propaguen por toda la app

@@ -1,5 +1,17 @@
 import { gql } from "@apollo/client";
 
+export const FETCH_USER = gql`
+  query obtenerUsuario{
+    obtenerUsuario {
+      id
+      nombre
+      apellido
+      email
+      fechaCreacion
+    }
+  }
+`
+
 export const SIGNUP_MUTATION = gql`
   mutation crearUsuario($input: UsuarioInput) {
     crearUsuario(input: $input) {

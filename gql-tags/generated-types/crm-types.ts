@@ -4,6 +4,7 @@
  */
 
 /** Clases de variables que se manejan en el servidor de GQL */
+export type Maybe<T> = T | null;
 export type Scalars = {
   ID: string
   String: string
@@ -17,20 +18,50 @@ export type Mutation = {
   __typename?: 'Mutation'
   /** Usuarios */
   autenticarUsuario: Token
-  crearUsuario: User
+  crearUsuario: Usuario
+  /** Clientes */
+  nuevoCliente: Cliente
 }
 
-/** Representación de usuarios en el sistema */
-export type User = {
-  __typename?: 'User'
+export type Query = {
+  __typename?: 'Query'
+  /** Usuarios */
+  obtenerUsuario: Usuario
+  /** Clientes */
+  obtenerClientes: Array<Cliente>
+  obtenerClientesVendedor: Array<Cliente>
+  obtenerCliente: Cliente
+  mejoresClientes: Array<TopCliente>
+}
+
+export type Cliente = {
+  __typename?: 'Cliente'
   id: Scalars['ID']
   nombre: Scalars['String']
   apellido: Scalars['String']
   email: Scalars['String']
+  telefono: Scalars['String']
+  empresa: Scalars['String']
   fechaCreacion: Scalars['String']
+  vendedorQueLoDioDeAlta: Scalars['ID']
 }
 
 export type Token = {
   __typename?: 'Token'
   token: Scalars['String']
+}
+
+export type TopCliente = {
+  __typename?: 'TopCliente'
+  cliente: Array<Cliente>
+}
+
+/** Representación de usuarios en el sistema */
+export type Usuario = {
+  __typename?: 'Usuario'
+  id: Scalars['ID']
+  nombre: Scalars['String']
+  apellido: Scalars['String']
+  email: Scalars['String']
+  fechaCreacion: Scalars['String']
 }
