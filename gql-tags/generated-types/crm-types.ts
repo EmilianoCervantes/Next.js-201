@@ -13,27 +13,30 @@ export type Scalars = {
   Float: number
 }
 
-/** Todos los mutations que existen */
-export type Mutation = {
-  __typename?: 'Mutation'
-  /** Usuarios */
-  autenticarUsuario: Token
-  crearUsuario: Usuario
-  /** Clientes */
-  nuevoCliente: Cliente
-}
-
+/** Todos los queries que existen */
 export type Query = {
   __typename?: 'Query'
-  /** Usuarios */
+  // Usuarios
   obtenerUsuario: Usuario
-  /** Clientes */
+  // Clientes
   obtenerClientes: Array<Cliente>
   obtenerClientesVendedor: Array<Cliente>
   obtenerCliente: Cliente
   mejoresClientes: Array<TopCliente>
 }
 
+/** Todos los mutations que existen */
+export type Mutation = {
+  __typename?: 'Mutation'
+  // Usuarios
+  autenticarUsuario: Token
+  crearUsuario: Usuario
+  // Clientes
+  nuevoCliente: Cliente
+  eliminarCliente: Scalars['String']
+}
+
+/** Todos los datos que se pueden leer de un cliente */
 export type Cliente = {
   __typename?: 'Cliente'
   id: Scalars['ID']
@@ -51,6 +54,7 @@ export type Token = {
   token: Scalars['String']
 }
 
+/** Datos recibidos de Top Cliente */
 export type TopCliente = {
   __typename?: 'TopCliente'
   cliente: Array<Cliente>

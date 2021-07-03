@@ -57,3 +57,9 @@ export const CREATE_CLIENTE_MUTATION = gql`
     }
   }
 `
+
+export const DELETE_CLIENTE_MUTATION = gql`
+  mutation eliminarCliente($id: ID!) {
+    eliminarCliente(id: $id)
+  }
+`
