@@ -33,6 +33,7 @@ export type Mutation = {
   crearUsuario: Usuario
   // Clientes
   nuevoCliente: Cliente
+  actualizarCliente: Cliente
   eliminarCliente: Scalars['String']
 }
 

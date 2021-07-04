@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export const FETCH_CLIENTES_QUERY = gql`
-  query obtenerClientes{
+  query obtenerClientes {
     obtenerClientes {
       id
       nombre
@@ -9,6 +9,22 @@ export const FETCH_CLIENTES_QUERY = gql`
       email
       telefono
       empresa
+      fechaCreacion
+      vendedorQueLoDioDeAlta
+    }
+  }
+`
+
+export const FETCH_CLIENTE_QUERY = gql`
+  query obtenerCliente($id: ID!) {
+    obtenerCliente(id: $id) {
+      id
+      nombre
+      apellido
+      email
+      telefono
+      empresa
+      fechaCreacion
       vendedorQueLoDioDeAlta
     }
   }
@@ -23,6 +39,7 @@ export const FETCH_CLIENTES_VENDEDOR_QUERY = gql`
       email
       telefono
       empresa
+      fechaCreacion
       vendedorQueLoDioDeAlta
     }
   }
@@ -52,6 +69,21 @@ export const CREATE_CLIENTE_MUTATION = gql`
       apellido
       email
       telefono
+      fechaCreacion
+      vendedorQueLoDioDeAlta
+    }
+  }
+`
+
+export const UPDATE_CLIENTE_MUTATION = gql`
+  mutation actualizarCliente($id: ID!, $input: ClienteInput) {
+    actualizarCliente(id: $id, input: $input) {
+      id
+      nombre
+      apellido
+      email
+      telefono
+      empresa
       fechaCreacion
       vendedorQueLoDioDeAlta
     }

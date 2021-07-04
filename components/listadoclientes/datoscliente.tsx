@@ -4,9 +4,14 @@ import DatoCliente from "./datocliente";
 import { useMutation } from '@apollo/client';
 import { Mutation } from '../../gql-tags/generated-types/crm-types';
 import { DELETE_CLIENTE_MUTATION, FETCH_CLIENTES_VENDEDOR_QUERY } from '../../gql-tags/clientes';
+import { ButtonIcon } from '../../widgets'
+import { useRouter } from 'next/router';
+import { EDITAR_CLIENTE } from '../../navigation/crm-user-navigation';
 
 export default function DatosCliente({ cliente, num }: DatosClienteProps) {
   const { nombre, apellido, email, empresa, id } = cliente
+
+  const router = useRouter()
 
   const [eliminarCliente] = useMutation<Mutation>(DELETE_CLIENTE_MUTATION, {
     update(cache) {
@@ -22,6 +27,13 @@ export default function DatosCliente({ cliente, num }: DatosClienteProps) {
       })
     }
   })
+
+  const editarCliente = () => {
+    router.push({
+      pathname: `${EDITAR_CLIENTE}[id]`,
+      query: { id },
+    })
+  }
 
   const confirmEliminarCliente = (id: string) => {
     Swal.fire({
@@ -63,16 +75,22 @@ export default function DatosCliente({ cliente, num }: DatosClienteProps) {
       <DatoCliente>{empresa}</DatoCliente>
       <DatoCliente>{email}</DatoCliente>
       <DatoCliente>
-        <button
-          type='button'
-          className="flex justify-center items-center bg-red-800 py-2 px-4 w-full text-white rounded text-xs uppercase font-bold"
-          onClick={() => confirmEliminarCliente(id)}
+        <ButtonIcon
+          color='bg-green-400'
+          click={() => editarCliente()}
+          title='Editar'
         >
-          <p>Eliminar</p>
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-        </button>
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+        </ButtonIcon>
+      </DatoCliente>
+      <DatoCliente>
+        <ButtonIcon
+          color='bg-red-800'
+          click={() => confirmEliminarCliente(id)}
+          title='Eliminar'
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </ButtonIcon>
       </DatoCliente>
     </tr>
   )
