@@ -4,14 +4,10 @@ import { Layout, ListadoProductos } from "../components"
 import { Query } from '../gql-tags/generated-types/crm-types'
 import { FETCH_PRODUCTOS_QUERY } from '../gql-tags/productos'
 import { NUEVO_PRODUCTO } from '../navigation/crm-user-navigation'
-import { Loading, TitleHeader } from "../widgets"
+import { ButtonNuevo, Loading, TitleHeader } from "../widgets"
 
 export default function Productos() {
   const { data, loading, error } = useQuery<Query>(FETCH_PRODUCTOS_QUERY)
-
-  const btnNuevoProducto = () => <Link href={NUEVO_PRODUCTO}>
-    <a className="bg-blue-800 py-2 px-5 mt-3 inline-block text-white rounded text-sm hover:bg-gray-800 mb-3 uppercase font-bold">Nuevo Producto</a>
-  </Link>
 
   if (loading) return <Loading />
 
@@ -20,7 +16,7 @@ export default function Productos() {
       <Layout>
         <TitleHeader>Productos</TitleHeader>
 
-        {btnNuevoProducto()}
+        <ButtonNuevo titulo='Producto' destino={NUEVO_PRODUCTO} />
 
         <div className="mt-10">
           <p>Todavía no has agregado ningún producto.</p>
@@ -33,7 +29,7 @@ export default function Productos() {
     <Layout>
       <TitleHeader>Productos</TitleHeader>
 
-      {btnNuevoProducto()}
+      <ButtonNuevo titulo='Producto' destino={NUEVO_PRODUCTO} />
 
       <table className="table-auto shadow-md mt-10 w-full w-lg">
         <thead className="bg-gray-800">

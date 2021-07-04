@@ -43,3 +43,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - ```node-fetch``` # https://www.npmjs.com/package/node-fetch
 - ```graphql``` # Porque usamos graphql
 - ```apollo-link-context``` # Modificar headers via context para que se propaguen por toda la app
+- ```react-select``` # Asignar a los pedidos: el cliente y los productos

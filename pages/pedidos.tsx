@@ -1,9 +1,13 @@
 import { Layout } from "../components"
+import { NUEVO_PEDIDO } from "../navigation/crm-user-navigation"
+import { ButtonNuevo, TitleHeader } from "../widgets"
 
 export default function Pedidos() {
   return (
     <Layout>
-      <h1 className="text-2xl text-gray-800 font-light">Pedidos</h1>
+      <TitleHeader>Pedidos</TitleHeader>
+
+      <ButtonNuevo titulo='Pedido' destino={NUEVO_PEDIDO} />
     </Layout>
   )
 }
