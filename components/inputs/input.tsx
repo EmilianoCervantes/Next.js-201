@@ -2,7 +2,7 @@ interface InputParams {
   error?: string
   name: string
   paraQuien?: string
-  value: string
+  value: string | number
   onChange: (any) => void
   onBlur?: (any) => void
 }
@@ -20,7 +20,7 @@ export default function Input({ error, name, paraQuien, value, onChange, onBlur 
     case 'password':
     case 'tel':
       type = nameClean;
-      break;
+      break
     case 'correo':
     case 'mail':
       type = 'email';
@@ -28,9 +28,13 @@ export default function Input({ error, name, paraQuien, value, onChange, onBlur 
     case 'cel':
     case 'celular':
       type = 'tel';
-      break;
+      break
+    case 'existencia':
+    case 'precio':
+      type = 'number'
+      break
     default:
-      break;
+      break
   }
 
   return (

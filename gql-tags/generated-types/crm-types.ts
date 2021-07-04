@@ -23,6 +23,10 @@ export type Query = {
   obtenerClientesVendedor: Array<Cliente>
   obtenerCliente: Cliente
   mejoresClientes: Array<TopCliente>
+  // PEDIDOS
+  // PRODUCTOS
+  obtenerProductos: Array<Producto>
+  obtenerProducto: Producto
 }
 
 /** Todos los mutations que existen */
@@ -35,6 +39,11 @@ export type Mutation = {
   nuevoCliente: Cliente
   actualizarCliente: Cliente
   eliminarCliente: Scalars['String']
+  // PEDIDOS
+  // PRODUCTOS
+  nuevoProducto: Producto
+  actualizarProducto: Producto
+  eliminarProducto: Scalars['String']
 }
 
 /** Todos los datos que se pueden leer de un cliente */
@@ -48,6 +57,15 @@ export type Cliente = {
   empresa: Scalars['String']
   fechaCreacion: Scalars['String']
   vendedorQueLoDioDeAlta: Scalars['ID']
+}
+
+export type Producto = {
+  __typename?: 'Producto'
+  id: Scalars['ID']
+  nombre: Scalars['String']
+  existencia: Scalars['Int']
+  precio: Scalars['Float']
+  fechaCreacion: Scalars['String']
 }
 
 export type Token = {

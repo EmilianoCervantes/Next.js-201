@@ -1,19 +1,17 @@
 import { useFormik } from "formik"
 import * as yup from 'yup'
 import { Input, Submit } from ".."
-import ClientFormProps from "./ClientForm-props"
+import ClientFormProps from "./clientform-props"
 
 export default function ClientForm({ data, paraQuien, submitTitle, onSubmit }: ClientFormProps) {
 
-  const { nombre, apellido, empresa, email, telefono } = data
-
   const formik = useFormik({
     initialValues: {
-      nombre: nombre ? nombre : '',
-      apellido: apellido ? apellido : '',
-      empresa: empresa ? empresa : '',
-      email: email ? email : '',
-      telefono: telefono ? telefono : '',
+      nombre: data?.nombre ? data?.nombre : '',
+      apellido: data?.apellido ? data?.apellido : '',
+      empresa: data?.empresa ? data?.empresa : '',
+      email: data?.email ? data?.email : '',
+      telefono: data?.telefono ? data?.telefono : '',
     },
     enableReinitialize: true,
     onSubmit: valores => {

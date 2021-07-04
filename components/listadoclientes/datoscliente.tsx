@@ -1,10 +1,9 @@
 import Swal from 'sweetalert2'
-import DatosClienteProps from "./datoscliente-props";
-import DatoCliente from "./datocliente";
-import { useMutation } from '@apollo/client';
-import { Mutation } from '../../gql-tags/generated-types/crm-types';
+import DatosClienteProps from "./datoscliente-props"
+import { useMutation } from '@apollo/client'
+import { Mutation } from '../../gql-tags/generated-types/crm-types'
 import { DELETE_CLIENTE_MUTATION, FETCH_CLIENTES_VENDEDOR_QUERY } from '../../gql-tags/clientes';
-import { ButtonIcon } from '../../widgets'
+import { ButtonIcon, DatoRow } from '../../widgets'
 import { useRouter } from 'next/router';
 import { EDITAR_CLIENTE } from '../../navigation/crm-user-navigation';
 
@@ -70,11 +69,11 @@ export default function DatosCliente({ cliente, num }: DatosClienteProps) {
 
   return (
     <tr>
-      <DatoCliente>{num}</DatoCliente>
-      <DatoCliente>{nombre} {apellido}</DatoCliente>
-      <DatoCliente>{empresa}</DatoCliente>
-      <DatoCliente>{email}</DatoCliente>
-      <DatoCliente>
+      <DatoRow>{num}</DatoRow>
+      <DatoRow>{nombre} {apellido}</DatoRow>
+      <DatoRow>{empresa}</DatoRow>
+      <DatoRow>{email}</DatoRow>
+      <DatoRow>
         <ButtonIcon
           color='bg-green-400'
           click={() => editarCliente()}
@@ -82,8 +81,8 @@ export default function DatosCliente({ cliente, num }: DatosClienteProps) {
         >
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
         </ButtonIcon>
-      </DatoCliente>
-      <DatoCliente>
+      </DatoRow>
+      <DatoRow>
         <ButtonIcon
           color='bg-red-800'
           click={() => confirmEliminarCliente(id)}
@@ -91,7 +90,7 @@ export default function DatosCliente({ cliente, num }: DatosClienteProps) {
         >
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
         </ButtonIcon>
-      </DatoCliente>
+      </DatoRow>
     </tr>
   )
 }
