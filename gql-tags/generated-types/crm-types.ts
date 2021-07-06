@@ -77,6 +77,14 @@ export type Pedido = {
   fechaCreacion: Scalars['String']
 }
 
+export type PedidoInput = {
+  __typename?: 'PedidoInput'
+  pedido: Array<PedidoProducto>
+  total: Scalars['Float']
+  clientePedido: Scalars['ID']
+  estatus: Estatus
+}
+
 export type PedidoProducto = {
   idProducto: Scalars['ID']
   cantidad: Scalars['Int']

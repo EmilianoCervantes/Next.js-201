@@ -1,0 +1,5 @@
+/** PEDIDOS */
+/** Cliente que será parte del pedido */
+export const SELECCIONAR_CLIENTE = 'SELECCIONAR_CLIENTE'
+export const SELECCIONAR_PRODUCTOS = 'SELECCIONAR_PRODUCTOS'
+export const CANTIDAD_PRODUCTO = 'CANTIDAD_PRODUCTO'

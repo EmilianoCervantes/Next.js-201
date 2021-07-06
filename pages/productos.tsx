@@ -1,17 +1,15 @@
-import { useQuery } from '@apollo/client'
-import Link from 'next/link'
 import { Layout, ListadoProductos } from "../components"
-import { Query } from '../gql-tags/generated-types/crm-types'
-import { FETCH_PRODUCTOS_QUERY } from '../gql-tags/productos'
+import { useProductos } from "../context"
 import { NUEVO_PRODUCTO } from '../navigation/crm-user-navigation'
 import { ButtonNuevo, Loading, TitleHeader } from "../widgets"
 
 export default function Productos() {
-  const { data, loading, error } = useQuery<Query>(FETCH_PRODUCTOS_QUERY)
+  const { productos, isError, isLoading, useRefetchProductos } = useProductos()
+  useRefetchProductos(productos)
 
-  if (loading) return <Loading />
+  if (isLoading) return <Loading />
 
-  if (error || !data?.obtenerProductos?.length) {
+  if (isError || !productos.length) {
     return (
       <Layout>
         <TitleHeader>Productos</TitleHeader>
@@ -44,7 +42,7 @@ export default function Productos() {
         </thead>
 
         <ListadoProductos
-          productos={data.obtenerProductos}
+          productos={productos}
         />
       </table>
     </Layout>

@@ -1,16 +1,18 @@
-import { useQuery } from '@apollo/client'
-import Link from 'next/link'
+import { useEffect } from 'react'
 import { Layout, ListadoClientes } from '../components'
-import { FETCH_CLIENTES_VENDEDOR_QUERY } from '../gql-tags/clientes'
-import { Query } from '../gql-tags/generated-types/crm-types';
-import { NUEVO_CLIENTE } from '../navigation/crm-user-navigation';
-import { ButtonNuevo, Loading, TitleHeader } from '../widgets';
+import { useClientes } from '../context'
+import { NUEVO_CLIENTE } from '../navigation/crm-user-navigation'
+import { ButtonNuevo, Loading, TitleHeader } from '../widgets'
 
 export default function Home() {
-  const { data, loading, error } = useQuery<Query>(FETCH_CLIENTES_VENDEDOR_QUERY)
 
-  if (loading) return <Loading />
-  else if (error || !data.obtenerClientesVendedor.length) {
+  const { clientes, isLoading, isError, useRefetchClientes } = useClientes()
+
+  useRefetchClientes(clientes)
+  
+  if (isLoading) return <Loading />
+  
+  else if (isError || !clientes.length) {
     return (
       <Layout>
         <TitleHeader>
@@ -46,7 +48,7 @@ export default function Home() {
           </tr>
         </thead>
 
-        <ListadoClientes clientesVendedor={data.obtenerClientesVendedor} />
+        <ListadoClientes clientesVendedor={clientes} />
       </table>
     </Layout>
   )

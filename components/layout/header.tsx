@@ -17,7 +17,7 @@ export default function Header() {
   if (loading) {
     return (
       <header className="flex justify-end">
-        <h1>Cargando...</h1>
+        <h1>Cargando CRM...</h1>
       </header>
     )
   }
