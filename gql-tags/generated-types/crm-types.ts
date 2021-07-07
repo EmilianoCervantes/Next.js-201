@@ -119,6 +119,7 @@ export type Token = {
 export type TopCliente = {
   __typename?: 'TopCliente'
   cliente: Array<Cliente>
+  totalCompra: Scalars['Float']
 }
 
 export type TopVendedor = {

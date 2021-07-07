@@ -45,12 +45,12 @@ export const FETCH_CLIENTES_VENDEDOR_QUERY = gql`
   }
 `
 
+/** ID causa un bug en JavaScript al ser retornado como NULL */
 export const MEJORES_CLIENTES_QUERY = gql`
   query mejoresClientes {
     mejoresClientes {
       totalCompra
       cliente {
-        id
         nombre
         apellido
         email

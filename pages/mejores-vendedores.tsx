@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/client"
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts'
+import { useEffect } from "react"
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
 import { Layout } from "../components"
 import { Query } from "../gql-tags/generated-types/crm-types"
 import { FETCH_MEJORES_VENDEDORES } from "../gql-tags/vendedores"
@@ -7,52 +8,19 @@ import { TitleHeader } from "../widgets"
 
 
 export default function MejoresVend() {
-  const { data, loading, error } = useQuery<Query>(FETCH_MEJORES_VENDEDORES)
+  const { data, loading, error, startPolling, stopPolling } = useQuery<Query>(FETCH_MEJORES_VENDEDORES)
 
-  const dataC = [
-    {
-      name: 'Page A',
-      uv: 4000,
-      pv: 2400,
-      amt: 2400,
-    },
-    {
-      name: 'Page B',
-      uv: 3000,
-      pv: 1398,
-      amt: 2210,
-    },
-    {
-      name: 'Page C',
-      uv: 2000,
-      pv: 9800,
-      amt: 2290,
-    },
-    {
-      name: 'Page D',
-      uv: 2780,
-      pv: 3908,
-      amt: 2000,
-    },
-    {
-      name: 'Page E',
-      uv: 1890,
-      pv: 4800,
-      amt: 2181,
-    },
-    {
-      name: 'Page F',
-      uv: 2390,
-      pv: 3800,
-      amt: 2500,
-    },
-    {
-      name: 'Page G',
-      uv: 3490,
-      pv: 4300,
-      amt: 2100,
-    },
-  ]
+  /**
+   * ANTES DE LOADING porque react hooks deben ser cargados siempre igual en cada render
+   * Esto es para consultar la base de datos cada 1 segundo
+   * Si hay algo distinto, que nos traiga la info
+   * Esto funciona más bien como un socket que indica HUBO O NO HUBO CAMBIOS y entonces consulta
+  */
+  useEffect(() => {
+    startPolling(1000)
+    // Hacer la limpieza del useEffect
+    return () => { stopPolling() }
+  }, [startPolling, stopPolling])
 
   if (loading) {
     return (
@@ -78,8 +46,12 @@ export default function MejoresVend() {
     )
   }
 
-  console.log(data.mejoresVendedores);
-  
+  const dataGrafica = data.mejoresVendedores.map(dato => {
+    return {
+      nombre: dato.vendedor[0].nombre,
+      totalVendido: dato.totalVendido
+    }
+  })
 
   return (
     <Layout>
@@ -87,25 +59,30 @@ export default function MejoresVend() {
         Mejores Vendedores
       </TitleHeader>
 
-      <BarChart
-        className="mt-10"
-        width={600}
-        height={500}
-        data={data.mejoresVendedores}
-        margin={{
-          top: 5,
-          right: 30,
-          left: 20,
-          bottom: 5,
-        }}
+      <ResponsiveContainer
+        width={'99%'}
+        height={550}
       >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Bar dataKey="pv" fill="#3182ce" />
-      </BarChart>
+        <BarChart
+          className="mt-10"
+          width={600}
+          height={500}
+          data={dataGrafica}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="nombre" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Bar dataKey="totalVendido" fill="#3182ce" />
+        </BarChart>
+      </ResponsiveContainer>
     </Layout>
   )
 }

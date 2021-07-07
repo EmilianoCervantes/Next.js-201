@@ -9,9 +9,9 @@ export default function Home() {
   const { clientes, isLoading, isError, useRefetchClientes } = useClientes()
 
   useRefetchClientes(clientes)
-  
+
   if (isLoading) return <Loading />
-  
+
   else if (isError || !clientes.length) {
     return (
       <Layout>
@@ -36,20 +36,22 @@ export default function Home() {
 
       <ButtonNuevo titulo='Cliente' destino={NUEVO_CLIENTE} />
 
-      <table className="table-auto shadow-md mt-10 w-full w-lg">
-        <thead className="bg-gray-800">
-          <tr className="text-white">
-            <th className="w-1/5 py-2">#</th>
-            <th className="w-1/5 py-2">Nombre</th>
-            <th className="w-1/5 py-2">Empresa</th>
-            <th className="w-1/5 py-2">Email</th>
-            <th className="w-1/5 py-2">Editar</th>
-            <th className="w-1/5 py-2">Eliminar</th>
-          </tr>
-        </thead>
+      <div className="overflow-x-scroll">
+        <table className="table-auto shadow-md mt-10 w-full w-lg">
+          <thead className="bg-gray-800">
+            <tr className="text-white">
+              <th className="w-1/5 py-2">#</th>
+              <th className="w-1/5 py-2">Nombre</th>
+              <th className="w-1/5 py-2">Empresa</th>
+              <th className="w-1/5 py-2">Email</th>
+              <th className="w-1/5 py-2">Editar</th>
+              <th className="w-1/5 py-2">Eliminar</th>
+            </tr>
+          </thead>
 
-        <ListadoClientes clientesVendedor={clientes} />
-      </table>
+          <ListadoClientes clientesVendedor={clientes} />
+        </table>
+      </div>
     </Layout>
-  )
+      )
 }
