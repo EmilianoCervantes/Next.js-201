@@ -1,9 +1,11 @@
 import { useFormik } from "formik"
+import { useState } from "react"
 import * as yup from 'yup'
 import { Input, Submit } from ".."
 import ClientFormProps from "./clientform-props"
 
 export default function ClientForm({ data, paraQuien, submitTitle, onSubmit }: ClientFormProps) {
+  const [enProceso, setEnProceso] = useState(false)
 
   const formik = useFormik({
     initialValues: {
@@ -44,7 +46,10 @@ export default function ClientForm({ data, paraQuien, submitTitle, onSubmit }: C
       <div className="w-full max-w-lg">
         <form
           className="bg-white shadow-md px-8 py-6 pb-8 mb-4"
-          onSubmit={formik.handleSubmit}
+          onSubmit={e => {
+            setEnProceso(true)
+            formik.handleSubmit(e)
+          }}
         >
           <Input
             error={formik.touched.nombre && formik.errors.nombre}
@@ -86,7 +91,7 @@ export default function ClientForm({ data, paraQuien, submitTitle, onSubmit }: C
             onBlur={formik.handleBlur}
             paraQuien={paraQuien}
           />
-          <Submit lbl={submitTitle} />
+          <Submit lbl={submitTitle} disabled={enProceso} />
         </form>
       </div>
     </div>

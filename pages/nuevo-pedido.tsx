@@ -12,6 +12,7 @@ import { CrmGenericMessage, TitleHeader } from "../widgets"
 export default function NuevoPedido() {
   const [total, setTotal] = useState(0)
   const [mensaje, setMensaje] = useState('')
+  const [envioEnCurso, setEnvioEnCurso] = useState(false)
 
   const { clientePedido, estatus, prodsSeleccionados, pedido } = usePedido()
 
@@ -44,6 +45,7 @@ export default function NuevoPedido() {
 
   const enviarPedido = async () => {
     try {
+      setEnvioEnCurso(true)
       const input = {
         pedido,
         total,
@@ -60,13 +62,14 @@ export default function NuevoPedido() {
         setMensaje(`Se ha creado tu pedido el: ${fechaGqlToHuman(fechaCreacion)}`)
 
         setTimeout(() => {
+          setEnvioEnCurso(false)
           setMensaje('')
           router.push(PEDIDOS)
         }, 3500);
       }
     } catch (error) {
       setMensaje(error.message)
-
+      setEnvioEnCurso(false)
       setTimeout(() => {
         setMensaje('')
       }, 3000);
@@ -89,7 +92,7 @@ export default function NuevoPedido() {
           <Total balance={total} />
 
           <Button
-            disabled={!clientePedido || !prodsSeleccionados.length || !total}
+            disabled={!clientePedido || !prodsSeleccionados.length || !total || envioEnCurso}
             onClick={enviarPedido}
           >
             Registrar Pedido

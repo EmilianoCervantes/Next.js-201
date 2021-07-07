@@ -31,6 +31,8 @@ export type Query = {
   obtenerPedidosVendedor: Array<Pedido>
   obtenerPedidoEspecifico: Pedido
   obtenerPedidosEstatus: Array<Pedido>
+  // VENDEDORES
+  mejoresVendedores: Array<TopVendedor>
 }
 
 /** Todos los mutations que existen */
@@ -117,6 +119,12 @@ export type Token = {
 export type TopCliente = {
   __typename?: 'TopCliente'
   cliente: Array<Cliente>
+}
+
+export type TopVendedor = {
+  __typename?: 'TopVendedor'
+  totalVendido: Scalars['Float']
+  vendedor: Array<Usuario>
 }
 
 /** Representación de usuarios en el sistema */

@@ -1,3 +1,8 @@
+// FUERA DEL SISTEMA
+export const NUEVA_CUENTA = '/nueva-cuenta'
+export const LOGIN = '/login'
+
+// MAIN
 export const HOME = '/'
 
 // CLIENTES
@@ -12,3 +17,7 @@ export const NUEVO_PEDIDO = '/nuevo-pedido'
 export const PRODUCTOS = '/productos'
 export const NUEVO_PRODUCTO = '/nuevo-producto'
 export const EDITAR_PRODUCTO = '/editar-producto/'
+
+// GRÁFICAS Y AVANZADOS
+export const MEJORES_CLIENTES = '/mejores-clientes'
+export const MEJORES_VENDEDORES = '/mejores-vendedores'

@@ -6,8 +6,9 @@ import * as yup from 'yup'
 import { Input, Layout2, Submit } from "../components"
 import { Mutation } from '../gql-tags/generated-types/crm-types'
 import { LOGIN_MUTATION } from '../gql-tags/usuarios'
+import { NUEVA_CUENTA } from '../navigation/crm-auth-navigation'
 import { HOME } from '../navigation/crm-user-navigation'
-import { CrmGenericMessage } from '../widgets'
+import { ButtonChangeScreen, CrmGenericMessage } from '../widgets'
 
 export default function Login() {
   const [mensaje, setMensaje] = useState('')
@@ -82,6 +83,10 @@ export default function Login() {
             />
             <Submit lbl="Iniciar Sesión" />
           </form>
+
+          <ButtonChangeScreen link={NUEVA_CUENTA}>
+            ¿Todavía no tienes una cuenta? Adelante, crea una
+          </ButtonChangeScreen>
         </div>
       </div>
     </Layout2>

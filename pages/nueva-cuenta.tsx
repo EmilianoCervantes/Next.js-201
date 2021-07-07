@@ -7,7 +7,7 @@ import { Input, Layout2, Submit } from "../components"
 import { Mutation } from '../gql-tags/generated-types/crm-types'
 import { SIGNUP_MUTATION } from '../gql-tags/usuarios'
 import { LOGIN } from '../navigation/crm-auth-navigation'
-import { CrmGenericMessage } from '../widgets'
+import { ButtonChangeScreen, CrmGenericMessage } from '../widgets'
 
 export default function NuevaCuenta() {
   const [mensaje, setMensaje] = useState('')
@@ -112,6 +112,10 @@ export default function NuevaCuenta() {
             />
             <Submit lbl="Crear Cuenta" />
           </form>
+
+          <ButtonChangeScreen link={LOGIN}>
+          ¿Ya te registraste? Inicia sesión
+          </ButtonChangeScreen>
         </div>
       </div>
     </Layout2>
