@@ -1,13 +1,6 @@
-interface InputParams {
-  error?: string
-  name: string
-  paraQuien?: string
-  value: string | number
-  onChange: (any) => void
-  onBlur?: (any) => void
-}
+import { InputParams } from "./input-params";
 
-export default function Input({ error, name, paraQuien, value, onChange, onBlur }: InputParams) {
+export default function Input({ error, name, paraQuien, value, onChange, onBlur, ...props }: InputParams) {
   /** SOL de: https://stackoverflow.com/questions/990904/remove-accents-diacritics-in-a-string-in-javascript */
   const nameClean = name.toLocaleLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
   let type = 'text'
@@ -29,6 +22,7 @@ export default function Input({ error, name, paraQuien, value, onChange, onBlur 
     case 'celular':
       type = 'tel';
       break
+    case 'cantidad':
     case 'existencia':
     case 'precio':
       type = 'number'
@@ -43,12 +37,13 @@ export default function Input({ error, name, paraQuien, value, onChange, onBlur 
         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor={nameClean}>{name}</label>
         <input
           id={nameClean}
-          className="shadow appearance-non border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none docus:shadow-outline"
+          className="shadow appearance-non border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           type={type}
           placeholder={`${name} ${paraQuien ? paraQuien : 'Usuario'}`}
           value={value}
           onChange={onChange}
           onBlur={onBlur}
+          {...props}
         />
       </div>
       {error && (

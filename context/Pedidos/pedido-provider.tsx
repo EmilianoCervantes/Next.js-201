@@ -1,24 +1,28 @@
 import { createContext, PropsWithChildren, useCallback, useContext, useReducer } from "react"
-import { Cliente, Estatus, Producto } from "../../gql-tags/generated-types/crm-types"
+import { Cliente, Estatus, PedidoProducto, Producto } from "../../gql-tags/generated-types/crm-types"
 import { reducerPedido } from "."
-import { SELECCIONAR_CLIENTE, SELECCIONAR_PRODUCTOS } from "../actions";
+import { CANTIDAD_PRODUCTO, SELECCIONAR_CLIENTE, SELECCIONAR_PRODUCTOS } from "../actions";
 
 interface PedidoProps {
   clientePedido: Cliente
-  pedido: Producto[]
+  prodsSeleccionados: Producto[]
+  pedido: PedidoProducto[]
   total: number
   estatus: Estatus
   actualizarCliente: (e: Cliente) => void
-  actualizarPedido: (e: Producto[]) => void
+  actualizarProductos: (e: Producto[]) => void
+  cantidadProductos: (e: Producto, cantidad: number) => void
 }
 
 const initValue: PedidoProps = {
   clientePedido: null,
+  prodsSeleccionados: [],
   pedido: [],
   total: 0,
   estatus: Estatus['PENDIENTE'],
   actualizarCliente: () => { },
-  actualizarPedido: () => { },
+  actualizarProductos: () => { },
+  cantidadProductos: () => { },
 }
 
 const PedidoContext = createContext(initValue);
@@ -35,8 +39,17 @@ export const PedidoState = ({ children }: PropsWithChildren<{}>) => {
     if (id) dispatch({ type: SELECCIONAR_CLIENTE, payload: id })
   }, [])
 
-  const actualizarPedido = useCallback((pedido: []) => {
-    if (!!pedido.length) dispatch({ type: SELECCIONAR_PRODUCTOS, payload: pedido })
+  const actualizarProductos = useCallback((prodsSeleccionados: []) => {
+    dispatch({ type: SELECCIONAR_PRODUCTOS, payload: prodsSeleccionados })
+  }, [])
+
+  const cantidadProductos = useCallback((prod: Producto, cantidad: number) => {
+    dispatch({
+      type: CANTIDAD_PRODUCTO, payload: {
+        idProducto: prod.id,
+        cantidad: Number(cantidad)
+      }
+    })
   }, [])
 
   return (
@@ -44,7 +57,8 @@ export const PedidoState = ({ children }: PropsWithChildren<{}>) => {
       value={{
         ...state,
         actualizarCliente,
-        actualizarPedido
+        actualizarProductos,
+        cantidadProductos
       }}
     >
       {children}

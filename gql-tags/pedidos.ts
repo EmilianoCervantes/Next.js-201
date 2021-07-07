@@ -5,7 +5,10 @@ export const FETCH_PEDIDOS_QUERY = gql`
   mutation obtenerPedidos {
     obtenerPedidos {
       id
-      pedido
+      pedido {
+        idProducto
+        cantidad
+      }
       total
       clientePedido
       vendedorPedido
@@ -20,7 +23,10 @@ export const FETCH_PEDIDOS_VENDEDOR_QUERY = gql`
   mutation obtenerPedidosVendedor {
     obtenerPedidosVendedor {
       id
-      pedido
+      pedido {
+        idProducto
+        cantidad
+      }
       total
       clientePedido
       vendedorPedido
@@ -34,7 +40,10 @@ export const CREATE_PEDIDO_MUTATION = gql`
   mutation nuevoPedido($input: PedidoInput) {
     nuevoPedido(input: $input) {
       id
-      pedido
+      pedido {
+        idProducto
+        cantidad
+      }
       total
       clientePedido
       vendedorPedido
@@ -45,10 +54,13 @@ export const CREATE_PEDIDO_MUTATION = gql`
 `
 
 export const UPDATE_PEDIDO_MUTATION = gql`
-  mutation actualizarPedido($id: ID!, $input: PedidoInput) {
-    actualizarPedido(id: $id, input: $input) {
+  mutation actualizarProductos($id: ID!, $input: PedidoInput) {
+    actualizarProductos(id: $id, input: $input) {
       id
-      pedido
+      pedido {
+        idProducto
+        cantidad
+      }
       total
       clientePedido
       vendedorPedido

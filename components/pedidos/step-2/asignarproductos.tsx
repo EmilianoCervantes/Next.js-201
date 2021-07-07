@@ -1,10 +1,10 @@
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import Select from 'react-select'
-import { usePedido, useProductos } from "../../context"
-import { Producto } from '../../gql-tags/generated-types/crm-types'
-import { NUEVO_PRODUCTO } from '../../navigation/crm-user-navigation'
-import { CrmErrorMessage, StepTitle } from "../../widgets"
+import { usePedido, useProductos } from "../../../context"
+import { Producto } from '../../../gql-tags/generated-types/crm-types'
+import { NUEVO_PRODUCTO } from '../../../navigation/crm-user-navigation'
+import { CrmErrorMessage, StepTitle } from "../../../widgets"
 
 export default function AsignarProductos() {
   const [listaProdsExistentes, setProductosExistentes] = useState<Producto[]>([])
@@ -13,15 +13,15 @@ export default function AsignarProductos() {
   const { productos, isError, isLoading, useRefetchProductos } = useProductos()
   useRefetchProductos(productos)
 
-  const { actualizarPedido } = usePedido()
+  const { actualizarProductos } = usePedido()
 
   useEffect(() => {
     setProductosExistentes(productos.filter(prod => !!prod.existencia))
   }, [productos])
 
   useEffect(() => {
-    actualizarPedido(listaProdsPedido)
-  }, [actualizarPedido, listaProdsPedido])
+    actualizarProductos(listaProdsPedido)
+  }, [actualizarProductos, listaProdsPedido])
 
   if (isLoading) {
     return (

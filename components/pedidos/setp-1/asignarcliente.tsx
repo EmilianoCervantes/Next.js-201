@@ -1,10 +1,10 @@
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import Select from 'react-select'
-import { useClientes, usePedido } from '../../context'
-import { Cliente } from '../../gql-tags/generated-types/crm-types'
-import { NUEVO_CLIENTE } from '../../navigation/crm-user-navigation'
-import { CrmErrorMessage, StepTitle } from '../../widgets'
+import { useClientes, usePedido } from '../../../context'
+import { Cliente } from '../../../gql-tags/generated-types/crm-types'
+import { NUEVO_CLIENTE } from '../../../navigation/crm-user-navigation'
+import { CrmErrorMessage, StepTitle } from '../../../widgets'
 
 export default function AsignarCliente() {
   const [cliente, setCliente] = useState<Cliente>(null)

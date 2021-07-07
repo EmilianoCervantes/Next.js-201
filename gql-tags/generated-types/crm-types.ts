@@ -49,7 +49,7 @@ export type Mutation = {
   eliminarProducto: Scalars['String']
   // PEDIDOS
   nuevoPedido: Pedido
-  actualizarPedido: Pedido
+  actualizarProductos: Pedido
   eliminarPedido: Scalars['String']
 }
 
@@ -64,6 +64,12 @@ export type Cliente = {
   empresa: Scalars['String']
   fechaCreacion: Scalars['String']
   vendedorQueLoDioDeAlta: Scalars['ID']
+}
+
+export enum Estatus {
+  CANCELADO = 'CANCELADO',
+  COMPLETADO = 'COMPLETADO',
+  PENDIENTE = 'PENDIENTE',
 }
 
 export type Pedido = {
@@ -88,12 +94,6 @@ export type PedidoInput = {
 export type PedidoProducto = {
   idProducto: Scalars['ID']
   cantidad: Scalars['Int']
-}
-
-export enum Estatus {
-  CANCELADO = 'CANCELADO',
-  COMPLETADO = 'COMPLETADO',
-  PENDIENTE = 'PENDIENTE',
 }
 
 export type Producto = {
