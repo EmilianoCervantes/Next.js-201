@@ -46,8 +46,10 @@ export const PedidoState = ({ children }: PropsWithChildren<{}>) => {
   const cantidadProductos = useCallback((prod: Producto, cantidad: number) => {
     dispatch({
       type: CANTIDAD_PRODUCTO, payload: {
+        cantidad: Number(cantidad),
         idProducto: prod.id,
-        cantidad: Number(cantidad)
+        nombre: prod.nombre,
+        precio: prod.precio
       }
     })
   }, [])

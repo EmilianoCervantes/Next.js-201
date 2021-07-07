@@ -1,11 +1,14 @@
 import { PropsWithChildren } from "react"
 import ButtonIconProps from "./button-icon-props"
 
-export const ButtonIcon = ({ children, color, click, title }: PropsWithChildren<ButtonIconProps>) => {
+export const ButtonIcon = ({ children, color, click, title, extraClasses }: PropsWithChildren<ButtonIconProps>) => {
+
+  const extra = extraClasses ? extraClasses : ''
+
   return (
     <button
       type='button'
-      className={`flex justify-center items-center ${color} py-2 px-4 w-full text-white rounded text-xs uppercase font-bold`}
+      className={`flex justify-center items-center py-2 px-4 w-full text-white rounded text-xs uppercase font-bold ${color} ${extra}`}
       onClick={click}
     >
       <p>{title}</p>

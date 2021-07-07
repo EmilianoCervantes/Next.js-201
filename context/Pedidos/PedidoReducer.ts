@@ -20,10 +20,10 @@ export const reducerPedido = (state, action) => {
 
       return { ...state, prodsSeleccionados: payload, pedido };
     case CANTIDAD_PRODUCTO:
-      const { cantidad, idProducto } = payload
+      const { cantidad, idProducto, nombre, precio } = payload
       const pedidoUpdated = state.pedido.filter(pedido => pedido?.idProducto !== idProducto)
 
-      return { ...state, pedido: [...pedidoUpdated, { idProducto, cantidad }] }
+      return { ...state, pedido: [...pedidoUpdated, { idProducto, cantidad, nombre, precio }] }
     default:
       return state;
   }

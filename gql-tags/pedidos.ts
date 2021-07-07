@@ -2,12 +2,14 @@ import { gql } from "@apollo/client";
 
 /** Obtener todos los pedidos sin importar el vendedor */
 export const FETCH_PEDIDOS_QUERY = gql`
-  mutation obtenerPedidos {
+  query obtenerPedidos {
     obtenerPedidos {
       id
       pedido {
         idProducto
         cantidad
+        nombre
+        precio
       }
       total
       clientePedido
@@ -20,12 +22,14 @@ export const FETCH_PEDIDOS_QUERY = gql`
 
 /** Obtener todos los pedidos PARA el vendedor logueado */
 export const FETCH_PEDIDOS_VENDEDOR_QUERY = gql`
-  mutation obtenerPedidosVendedor {
+  query obtenerPedidosVendedor {
     obtenerPedidosVendedor {
       id
       pedido {
         idProducto
         cantidad
+        nombre
+        precio
       }
       total
       clientePedido
@@ -43,6 +47,8 @@ export const CREATE_PEDIDO_MUTATION = gql`
       pedido {
         idProducto
         cantidad
+        nombre
+        precio
       }
       total
       clientePedido
@@ -54,12 +60,14 @@ export const CREATE_PEDIDO_MUTATION = gql`
 `
 
 export const UPDATE_PEDIDO_MUTATION = gql`
-  mutation actualizarProductos($id: ID!, $input: PedidoInput) {
-    actualizarProductos(id: $id, input: $input) {
+  mutation actualizarPedido($id: ID!, $input: PedidoInput) {
+    actualizarPedido(id: $id, input: $input) {
       id
       pedido {
         idProducto
         cantidad
+        nombre
+        precio
       }
       total
       clientePedido

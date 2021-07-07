@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { AsignarCliente, AsignarProductos, Button, CantidadProductos, Layout, Total } from "../components"
 import { usePedido } from "../context"
 import { Mutation } from "../gql-tags/generated-types/crm-types"
-import { CREATE_PEDIDO_MUTATION } from "../gql-tags/pedidos"
+import { CREATE_PEDIDO_MUTATION, FETCH_PEDIDOS_VENDEDOR_QUERY } from "../gql-tags/pedidos"
 import { PEDIDOS } from "../navigation/crm-user-navigation"
 import { fechaGqlToHuman } from "../utilities"
 import { CrmGenericMessage, TitleHeader } from "../widgets"
@@ -15,7 +15,18 @@ export default function NuevoPedido() {
 
   const { clientePedido, estatus, prodsSeleccionados, pedido } = usePedido()
 
-  const [nuevoPedido] = useMutation<Mutation>(CREATE_PEDIDO_MUTATION)
+  const [nuevoPedido] = useMutation<Mutation>(CREATE_PEDIDO_MUTATION, {
+    update(cache, { data: { nuevoPedido } }) {
+      const { obtenerPedidosVendedor } = cache.readQuery({ query: FETCH_PEDIDOS_VENDEDOR_QUERY })
+
+      cache.writeQuery({
+        query: FETCH_PEDIDOS_VENDEDOR_QUERY,
+        data: {
+          obtenerPedidosVendedor: [...obtenerPedidosVendedor, nuevoPedido]
+        }
+      })
+    }
+  })
 
   const router = useRouter()
 

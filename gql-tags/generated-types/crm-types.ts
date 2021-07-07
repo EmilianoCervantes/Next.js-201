@@ -49,7 +49,7 @@ export type Mutation = {
   eliminarProducto: Scalars['String']
   // PEDIDOS
   nuevoPedido: Pedido
-  actualizarProductos: Pedido
+  actualizarPedido: Pedido
   eliminarPedido: Scalars['String']
 }
 
@@ -92,8 +92,11 @@ export type PedidoInput = {
 }
 
 export type PedidoProducto = {
-  idProducto: Scalars['ID']
+  __typename?: 'PedidoProducto'
   cantidad: Scalars['Int']
+  idProducto: Scalars['ID']
+  nombre: Scalars['String']
+  precio: Scalars['Float']
 }
 
 export type Producto = {

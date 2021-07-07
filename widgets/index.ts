@@ -4,4 +4,5 @@ export { default as Loading } from './loading'
 
 export * from './buttons'
 export * from './tablas'
+export * from './texts'
 export * from './titles'
